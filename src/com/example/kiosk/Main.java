@@ -1,28 +1,28 @@
 package com.example.kiosk;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        String[] menuArray = new String[5];
-        menuArray[0] = "0. 종료";
-        menuArray[1] = "1. ShackBurger   | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거";
-        menuArray[2] = "2. SmokeShack    | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거";
-        menuArray[3] = "3. Cheeseburger  | W 6.9 | 포테이토 번과 비프패티, 치즈가 토핑된 치즈버거";
-        menuArray[4]= "4. Hamburger     | W 5.4 | 비프패티를 기반으로 야채가 들어간 기본버거";
 
-        Scanner sc = new Scanner(System.in);
 
-        int idx =-1;
+            List<MenuItem> menuList = new ArrayList<>();
 
-        while(idx!=0){
-            System.out.println(String.join("\n",menuArray));
-            System.out.println("번호를 선택하시오.");
-            idx = sc.nextInt();
-            System.out.println(menuArray[idx]);
-        }
+            menuList.add(new MenuItem("ShackBurger",6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+            menuList.add(new MenuItem("SmokeShack",8.9, "베이컨과 체리 페퍼가 추가된 치즈버거"));
+            menuList.add(new MenuItem("Cheesburger",6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+            menuList.add(new MenuItem("Hamburger",5.4, "고기 패티만 들어간 기본 버거"));
+
+
+            for ( int i=0; i<menuList.size();i++){
+                System.out.println((i+1)+". "+menuList.get(i));
+
+            }
+            System.out.println("0. 종료");
+
+//
 
 
     }
