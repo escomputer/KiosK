@@ -3,9 +3,9 @@ package com.example.kiosk;
 public class MenuItem {
 
     //속성
-    String name;
-    double price;
-    String info;
+    private String name;
+    private double price;
+    private String info;
 
 
     //생성자
@@ -16,13 +16,23 @@ public class MenuItem {
     }
 
 
+    public String getName(){
+        return name;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
+    public String getInfo(){
+        return info;
+    }
+
 
     //기능
     @Override
     public String toString(){
         return (name+" | ₩ "+price+" | "+info);
 
+
     }
-
-
-}
