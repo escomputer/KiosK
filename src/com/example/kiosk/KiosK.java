@@ -30,11 +30,11 @@ public class KiosK {
                 System.out.println("키오스크를 종료합니다.");
                 break;
             }
-            else {
+            else if (idx>0 && idx<=menuItems.size()){
                 System.out.println("=============추가============");
                 System.out.println(idx+". "+menuItems.get(idx-1));
                 System.out.println("============================");
-            }
+            } else System.out.println("항목에 있는 번호를 입력해주세요.");
     }
 
 
