@@ -17,7 +17,7 @@ public class MenuItem {
 
 
     public String getName(){
-        return name;
+        return  name;
     }
 
     public double getPrice(){
@@ -31,8 +31,8 @@ public class MenuItem {
 
     //기능
     @Override
-    public String toString(){
-        return (name+" | ₩ "+price+" | "+info);
+    public String toString() {
+        return (name + " | ₩ " + price + " | " + info);
 
-
+    }
     }
