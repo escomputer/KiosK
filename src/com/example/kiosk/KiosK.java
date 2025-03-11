@@ -32,7 +32,7 @@ public class KiosK {
             }
             System.out.println("0. 종료");
 
-            System.out.println(" 번호를 선택해주세요. ");
+            System.out.println("번호를 선택해주세요. ");
             int idx=sc.nextInt();
 
             if (idx==0) {
@@ -40,12 +40,37 @@ public class KiosK {
                 break;
             }
             else if (idx>0 && idx<=menus.size()){
-                System.out.println("=============추가============");
-                System.out.println(idx+". "+menus.get(idx-1));
-                System.out.println("============================");
+                showMenus(menus.get(idx-1)); // 카테고리 번호에 맞게 세부 메뉴 보여주는 메서드를 소환함
             } else System.out.println("항목에 있는 번호를 입력해주세요.");
     }
 
-        sc.close();
+
 }
+private void showMenus(Menu menu){
+        Scanner sc = new Scanner(System.in);
+
+    while(true) {
+        List<MenuItem> items = menu.getMenu();
+        System.out.println("\n===="+menu.getCategory()+"====");
+        for (int i = 0; i < menus.size(); i++) {
+            System.out.println((i + 1) + ". " + items.get(i));
+
+        }
+        System.out.println("0. 뒤로가기");
+
+        System.out.println("번호를 선택해주세요. ");
+        int idx=sc.nextInt();
+
+        if (idx==0) {
+            break; // 반복문 탈출 -> start()처음으로 돌아감.
+        }
+        else if (idx>0 && idx<=menus.size()){
+            System.out.println("=============추가============");
+            System.out.println(idx+". "+items.get(idx-1));
+            System.out.println("============================");
+        } else System.out.println("항목에 있는 번호를 입력해주세요.");
+    }
+    sc.close();
+}
+
 }
