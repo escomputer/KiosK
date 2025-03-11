@@ -17,9 +17,7 @@ public class KiosK {
 
 
     //기능
-    public void addMenu(Menu menu){
-        menus.add(menu);
-    }
+
     public void start(){
         Scanner sc = new Scanner(System.in);
 
