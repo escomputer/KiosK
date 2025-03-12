@@ -85,6 +85,7 @@ public class KiosK {
                 if (orderIdx == 1) {
                     order();
                 } else if (orderIdx == 2) {
+                    start();
                 } else throw new IllegalArgumentException();
             } else {
                 cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
