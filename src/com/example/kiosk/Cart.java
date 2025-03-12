@@ -42,4 +42,12 @@ public class Cart {
     public void clearCart() {
         cartList.clear();
     }
+
+    public double getTotalPrice(){
+        double total=0;
+        for(MenuItem item : cartList){
+            total+=item.getPrice();
+        }
+        return total;
+    }
 }
