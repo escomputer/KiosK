@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Cart {
 
-    private List<MenuItem> selectToCart;
+    private List<MenuItem> cartList;
 
     public Cart(){
-        this.selectToCart = new ArrayList<>();
+        this.cartList = new ArrayList<>();
     }
 
     public void addCart(MenuItem item){
-        selectToCart.add(item);
+        cartList.add(item);
         System.out.println(item.getName()+"이 장바구니에 추가되었습니다.");
     }
 }
