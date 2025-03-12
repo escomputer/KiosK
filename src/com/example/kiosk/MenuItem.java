@@ -16,6 +16,18 @@ public class MenuItem {
     }
 
 
+    public String getName(){
+        return  name;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
+    public String getInfo(){
+        return info;
+    }
+
 
     //기능
     @Override
