@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-    String Category;
-    List<MenuItem> menuItems = new ArrayList<>();
+    private String Category;
+    private List<MenuItem> menuItems ;
 
 
     public Menu(String Category){
-        this.menuItems= menuItems;
+        this.menuItems= new ArrayList<>();
         this.Category = Category;
     } // 카테고리 추가 카테고리에는 카테고리와 메뉴들로 구성되어있음.
 
