@@ -49,9 +49,9 @@ public class Main {
         drinkMenu.addMenuItem(shakes);
 
         //리스트에 추가
-        menus.add(burgerMenu);
-        menus.add(sideMenu);
-        menus.add(drinkMenu);
+        kiosk.addMenu(burgerMenu);
+        kiosk.addMenu(sideMenu);
+        kiosk.addMenu(drinkMenu);
 
 
         kiosk.start();
