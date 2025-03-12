@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         List<Menu> menus = new ArrayList<>();
         KiosK kiosk = new KiosK(menus);
+        Cart cart = new Cart();
 
         //카테고리 추가하기
         Menu burgerMenu = new Menu("버거");
