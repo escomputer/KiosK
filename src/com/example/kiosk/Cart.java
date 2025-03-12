@@ -21,10 +21,7 @@ public class Cart {
     }
 
     public void showCart(){
-        if (cartList.isEmpty()){
-            System.out.println("장바구니가 비어있습니다.");
-            return;
-        }
+
         double total = 0;
         System.out.println("====장바구니====");
         for (int i =0;i<cartList.size();i++){
@@ -40,5 +37,9 @@ public class Cart {
 
     public boolean isEmpty(){
         return cartList.isEmpty();
+    }
+
+    public void clearCart() {
+        cartList.clear();
     }
 }

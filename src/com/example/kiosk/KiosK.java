@@ -33,6 +33,9 @@ public class KiosK {
 
             }
             if(!cart.isEmpty()){
+                System.out.println("\n[ ORDER MENU ]");
+                System.out.println(menus.size()+". Orders  | 장바구니를 확인 후 주문합니다.");
+                System.out.println((menus.size()+1)+". Cancel  | 진행 중인 주문을 취소합니다.");
 
             }
 
@@ -42,29 +45,51 @@ public class KiosK {
             try {
                 System.out.println("번호를 선택해주세요. ");
                 int idx = sc.nextInt();
-                if (idx < 0 || idx > menus.size()) {
-                    throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
-                }
+
                 if (idx == 0) {
                     System.out.println("키오스크를 종료합니다.");
 
                     break;
                 }
+                if (idx >= 1 || idx < menus.size()) {
+                    showMenus(menus.get(idx - 1), sc); // 두 조건문에 안걸림 -> 정상 입력 됐을때 처리하는
+                } else if(idx==menus.size()||idx==menus.size()+1) {
+                    if (cart.isEmpty()) throw new IllegalArgumentException();
+                    else showOrderMenu(idx,sc);
+                } else {
+                    throw new IllegalArgumentException();
+                }
 
-                showMenus(menus.get(idx - 1),sc); // 두 조건문에 안걸림 -> 정상 입력 됐을때 처리하는
+
+
 
 
             } catch (InputMismatchException e) {
                 System.out.println("숫자를 입력해주세요.");
                 sc.nextLine(); //버퍼 비우기 !!
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.println("항목에 있는 번호를 눌러주세요.");
                 sc.nextLine();
             }
 
         }
 
         sc.close(); // start -> showMenus -> start 할 경우 대비해서 start가 완전히 끝날때 sc.close()
+    }
+
+    private void showOrderMenu(int idx, Scanner sc) {
+        if (idx==menus.size()){
+            cart.showCart();
+            order();
+        } else {
+            cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
+            start();
+        }
+
+    }
+
+    private void order() {
+        System.out.println("주문할건지 묻는 함수");
     }
 
     private void showMenus(Menu menu ,Scanner sc) {
