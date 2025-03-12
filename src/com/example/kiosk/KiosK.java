@@ -8,11 +8,12 @@ public class KiosK {
 
     //속성
     private List<Menu> menus; // Menu에서 관리되는 리스트를 활용한다.
-
+    private Cart cart;
 
     //생성자
     public KiosK(List<Menu> menus) {
         this.menus = menus;
+        this.cart = new Cart();
     }
 
 
@@ -64,7 +65,7 @@ public class KiosK {
     private void showMenus(Menu menu) {
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+
             List<MenuItem> items = menu.getMenu();
             System.out.println("\n====" + menu.getCategory() + "====");
             for (int i = 0; i < items.size(); i++) {
@@ -79,23 +80,31 @@ public class KiosK {
                 int idx = sc.nextInt();
 
                 if (idx == 0) {
-                    break; // 반복문 탈출 -> start()처음으로 돌아감.
+                    start(); // start()처음으로 돌아감. 상위 단계가 start라서 뒤로가기 효과있음
                 }
                 if (idx < 0 || idx > items.size()) {
-                    throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
+                    throw new IllegalArgumentException();
                 }
-                System.out.println("=============추가============");
-                System.out.println(idx + ". " + items.get(idx - 1));
-                System.out.println("============================");
+                MenuItem selectedItem = items.get(idx-1);
+                System.out.println("선택한 항목 : " + selectedItem);
+
+                System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                System.out.println("1. 확인       2. 선택 취소(뒤로 가기)");
+
+                int cartidx = sc.nextInt();
+                if(cartidx==1) cart.addCart(selectedItem);
+                else if (cartidx==2) start(); //다시 처음으로 돌아감
+                else throw new IllegalArgumentException();
+
             } catch (InputMismatchException e) {
                 System.out.println("숫자를 입력해주세요.");
                 sc.nextLine(); //버퍼 비우기 !!
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.println("항목에 있는 번호를 눌러주세요.");
                 sc.nextLine();
             }
         }
-    }
+
 
 
 }
