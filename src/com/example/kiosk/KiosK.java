@@ -83,7 +83,9 @@ public class KiosK {
                 System.out.println("1.주문    2.메뉴판으로 돌아가기");
                 int orderIdx = sc.nextInt();
                 if (orderIdx == 1) {
-                    order();
+                    System.out.println("주문이 완료되었습니다. 금액은 ₩ "+ cart.getTotalPrice()+" 입니다.");
+                    System.exit(0);
+
                 } else if (orderIdx == 2) {
                     start();
                 } else throw new IllegalArgumentException();
@@ -99,9 +101,6 @@ public class KiosK {
 
     }
 
-    private void order() {
-        System.out.println("주문할건지 묻는 함수");
-    }
 
     private void showMenus(Menu menu, Scanner sc) {
 

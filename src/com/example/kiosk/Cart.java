@@ -31,7 +31,7 @@ public class Cart {
         }
 
         System.out.println("============================");
-        System.out.println("총 금액 : "+ total);
+        System.out.println("총 금액 : ₩"+ total);
         System.out.println("============================");
     }
 
