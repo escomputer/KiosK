@@ -32,6 +32,11 @@ public class KiosK {
                 System.out.println((i + 1) + ". " + menus.get(i).getCategory());
 
             }
+            if(!cart.isEmpty()){
+
+            }
+
+
             System.out.println("0. 종료");
 
             try {
@@ -46,7 +51,7 @@ public class KiosK {
                     break;
                 }
 
-                showMenus(menus.get(idx - 1)); // 두 조건문에 안걸림 -> 정상 입력 됐을때 처리하는
+                showMenus(menus.get(idx - 1),sc); // 두 조건문에 안걸림 -> 정상 입력 됐을때 처리하는
 
 
             } catch (InputMismatchException e) {
@@ -62,8 +67,8 @@ public class KiosK {
         sc.close(); // start -> showMenus -> start 할 경우 대비해서 start가 완전히 끝날때 sc.close()
     }
 
-    private void showMenus(Menu menu) {
-        Scanner sc = new Scanner(System.in);
+    private void showMenus(Menu menu ,Scanner sc) {
+
 
 
             List<MenuItem> items = menu.getMenu();
@@ -106,5 +111,12 @@ public class KiosK {
         }
 
 
+    private void showOrderMenus(Scanner sc){
+        System.out.println("\n===== [ ORDER MENU ] =====");
+        System.out.println("4. Orders  | 장바구니를 확인 후 주문합니다.");
+        System.out.println("5. Cancel  | 진행중인 주문을 취소합니다.");
+
+    }
 
 }
+

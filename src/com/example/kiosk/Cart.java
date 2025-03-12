@@ -8,6 +8,7 @@ public class Cart {
     private List<MenuItem> cartList;
 
 
+
     //생성자
     public Cart(){
         this.cartList = new ArrayList<>();
@@ -35,5 +36,9 @@ public class Cart {
         System.out.println("============================");
         System.out.println("총 금액 : "+ total);
         System.out.println("============================");
+    }
+
+    public boolean isEmpty(){
+        return cartList.isEmpty();
     }
 }
