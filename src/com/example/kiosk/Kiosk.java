@@ -22,7 +22,6 @@ public class Kiosk {
     }
 
 
-
     public void start() {
         Scanner sc = new Scanner(System.in);
 
@@ -81,14 +80,16 @@ public class Kiosk {
                 System.out.println("위와 같이 주문 하시겠습니까?");
                 System.out.println("1.주문    2.메뉴판으로 돌아가기");
                 int orderIdx = sc.nextInt();
-                if (orderIdx == 1) {
-                    order(sc);
-                    System.exit(0);
+                switch (orderIdx) {
+                    case 1:
+                        order(sc);
+                        System.exit(0);
 
-
-                } else if (orderIdx == 2) {
-                    start();
-                } else throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
+                    case 2:
+                        start();
+                    default:
+                        throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
+                }
             } else {
                 cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
                 start();
@@ -101,7 +102,7 @@ public class Kiosk {
 
     }
 
-    private void order(Scanner sc){
+    private void order(Scanner sc) {
         System.out.println("할인 정보를 입력해주세요.");
         System.out.println("1. 국가유공자 : 10% ");
         System.out.println("2. 군인     :  5%");
@@ -109,19 +110,16 @@ public class Kiosk {
         System.out.println("4. 일반     :  0%");
 
         int discountIdx = sc.nextInt();
-        Discount discount = switch(discountIdx){
+        Discount discount = switch (discountIdx) {
             case 1 -> Discount.NationalMerit;
-            case 2->Discount.Soldier;
-            case 3->Discount.Student;
-            case 4->Discount.Person;
+            case 2 -> Discount.Soldier;
+            case 3 -> Discount.Student;
+            case 4 -> Discount.Person;
             default -> throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요");
         };
 
         double totalPrice = cart.getTotalPrice(discount);
         System.out.println("주문이 완료되었습니다. 금액은 ₩ " + totalPrice + " 입니다.");
-
-
-
 
 
     }
