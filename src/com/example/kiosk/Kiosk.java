@@ -4,14 +4,14 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class KiosK {
+public class Kiosk {
 
     //속성
     private List<Menu> menus; // Menu에서 관리되는 리스트를 활용한다.
     private Cart cart;
 
     //생성자
-    public KiosK(List<Menu> menus) {
+    public Kiosk(List<Menu> menus) {
         this.menus = menus;
         this.cart = new Cart();
     }
@@ -83,6 +83,7 @@ public class KiosK {
                 int orderIdx = sc.nextInt();
                 if (orderIdx == 1) {
                     order(sc);
+                    System.exit(0);
 
 
                 } else if (orderIdx == 2) {
