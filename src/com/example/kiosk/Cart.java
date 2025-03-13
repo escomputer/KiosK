@@ -2,6 +2,7 @@ package com.example.kiosk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.*;
 
 public class Cart {
@@ -53,10 +54,25 @@ public class Cart {
         return total*discountPrice;
     }
 
-//    public void removeName(String name){
-//        cartList=cartList.stream()
-//                .filter(item->!item.getName().equals(name))
-//                .collect(Collectors.toList());
-//        System.out.println(name+"을 장바구니에서 제거합니다.");
-//    }
+    public boolean removeName(Scanner sc){
+        System.out.println("어떤 항목을 삭제하시겠습니까?");
+        if (sc.hasNextLine()) sc.nextLine(); //버퍼 비우기용
+        String name = sc.nextLine();
+
+
+        boolean exist = cartList.stream()
+                .anyMatch(item->item.getName().equalsIgnoreCase(name));
+
+        if (!exist) {System.out.println("장바구니에 " + name + "이(가) 없습니다. 다시 입력해주세요.");
+           return false;
+
+        }
+            cartList=cartList.stream()
+                    .filter(item->!item.getName().equalsIgnoreCase(name))
+                    .collect(Collectors.toList());
+            System.out.println(name+"을 장바구니에서 제거합니다.");
+            return true;
+
+
+   }
 }
