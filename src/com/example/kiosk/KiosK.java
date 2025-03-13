@@ -50,11 +50,11 @@ public class KiosK {
                 if (idx >= 1 && idx <= menus.size()) {
                     showMenus(menus.get(idx - 1), sc); // 두 조건문에 안걸림 -> 정상 입력 됐을때 처리하는
                 } else if (idx == menus.size() + 1 || idx == menus.size() + 2) {
-                    if (cart.isEmpty()) throw new IllegalArgumentException();
+                    if (cart.isEmpty()) throw new IllegalArgumentException("장바구니가 비어있어 해당번호는 비활성화 상태입니다.");
                     else showOrderMenu(idx, sc);
                     break;
                 } else {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
                 }
 
 
@@ -62,7 +62,7 @@ public class KiosK {
                 System.out.println("숫자를 입력해주세요.");
                 sc.nextLine(); //버퍼 비우기 !!
             } catch (IllegalArgumentException e) {
-                System.out.println("항목에 있는 번호를 눌러주세요.");
+                System.out.println(e.getMessage());
                 sc.nextLine();
             }
 
@@ -79,20 +79,45 @@ public class KiosK {
                 System.out.println("1.주문    2.메뉴판으로 돌아가기");
                 int orderIdx = sc.nextInt();
                 if (orderIdx == 1) {
-                    System.out.println("주문이 완료되었습니다. 금액은 ₩ "+ cart.getTotalPrice()+" 입니다.");
-                    System.exit(0);
+                    Order(sc);
+
 
                 } else if (orderIdx == 2) {
                     start();
-                } else throw new IllegalArgumentException();
+                } else throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
             } else {
                 cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
                 start();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("항목에 있는 번호를 눌러주세요.");
+            System.out.println(e.getMessage());
             sc.nextLine();
         }
+
+
+    }
+
+    private void Order(Scanner sc){
+        System.out.println("할인 정보를 입력해주세요.");
+        System.out.println("1. 국가유공자 : 10% ");
+        System.out.println("2. 군인     :  5%");
+        System.out.println("3. 학생     :  3%");
+        System.out.println("4. 일반     :  0%");
+
+        int discountIdx = sc.nextInt();
+        Discount discount = switch(discountIdx){
+            case 1 -> Discount.NationalMerit;
+            case 2->Discount.Soldier;
+            case 3->Discount.Student;
+            case 4->Discount.Person;
+            default -> throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요");
+        };
+
+        double totalPrice = cart.getTotalPrice(discount);
+        System.out.println("주문이 완료되었습니다. 금액은 ₩ " + totalPrice + " 입니다.");
+
+
+
 
 
     }
@@ -118,7 +143,7 @@ public class KiosK {
                 start(); // start()처음으로 돌아감. 상위 단계가 start라서 뒤로가기 효과있음
             }
             if (idx < 0 || idx > items.size()) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("올바른 메뉴를 눌러주세요.\n처음으로 돌아갑니다.1");
             }
             MenuItem selectedItem = items.get(idx - 1);
             System.out.println("선택한 항목 : " + selectedItem);
@@ -129,13 +154,13 @@ public class KiosK {
             int cartidx = sc.nextInt();
             if (cartidx == 1) cart.addCart(selectedItem);
             else if (cartidx == 2) start(); //다시 처음으로 돌아감
-            else throw new IllegalArgumentException();
+            else throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
 
         } catch (InputMismatchException e) {
             System.out.println("숫자를 입력해주세요.");
             sc.nextLine(); //버퍼 비우기 !!
         } catch (IllegalArgumentException e) {
-            System.out.println("항목에 있는 번호를 눌러주세요.");
+            System.out.println(e.getMessage());
             sc.nextLine();
         }
     }
