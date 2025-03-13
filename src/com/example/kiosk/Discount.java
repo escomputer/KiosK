@@ -12,7 +12,7 @@ public enum Discount {
         this.discountPrice = discountPrice;
     }
 
-    public double discount() {
+    public double getDiscount() {
         return discountPrice;
     }
 }
