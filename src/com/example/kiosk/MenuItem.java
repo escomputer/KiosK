@@ -6,13 +6,15 @@ public class MenuItem {
     private String name;
     private double price;
     private String info;
+    private Menu.Category category;
 
 
     //생성자
-    public MenuItem(String name, double price, String info){
+    public MenuItem(String name, double price, String info,Menu.Category category){
         this.name=name;
         this.price=price;
         this.info=info;
+        this.category=category;
     }
 
 
@@ -26,6 +28,10 @@ public class MenuItem {
 
     public String getInfo(){
         return info;
+    }
+
+    public Menu.Category getCategory(){
+        return category;
     }
 
 
