@@ -77,32 +77,31 @@ public class Kiosk {
 
     private void showOrderMenu(int idx, Scanner sc) {
 
-            if (idx == menus.size() + 1) {
-                cart.showCart();
-                System.out.println("위와 같이 주문 하시겠습니까?");
-                System.out.println("1.주문    2.메뉴판으로 돌아가기    3.장바구니 메뉴 삭제하기 ");
-                int orderIdx = sc.nextInt();
-                switch (orderIdx) {
-                    case 1:
-                        order(sc);
-                        System.exit(0);
+        if (idx == menus.size() + 1) {
+            cart.showCart();
+            System.out.println("위와 같이 주문 하시겠습니까?");
+            System.out.println("1.주문    2.메뉴판으로 돌아가기    3.장바구니 메뉴 삭제하기 ");
+            int orderIdx = sc.nextInt();
+            switch (orderIdx) {
+                case 1:
+                    order(sc);
+                    System.exit(0);
 
-                    case 2:
-                        start();
-                        break;
-                    case 3:
-                        while(true){
-                            if(cart.removeName(sc)) break;
-                        }
-                        break;
-                    default:
-                        throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
-                }
-            } else {
-                cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
-                start();
+                case 2:
+                    start();
+                    break;
+                case 3:
+                    while (true) {
+                        if (cart.removeName(sc)) break;
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
             }
-
+        } else {
+            cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
+            start();
+        }
 
 
     }
@@ -120,11 +119,11 @@ public class Kiosk {
             case 2 -> Discount.Soldier;
             case 3 -> Discount.Student;
             case 4 -> Discount.Person;
-            default -> throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요");
+            default -> throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요\n처음으로 돌아갑니다.");
         };
 
         double totalPrice = cart.getTotalPrice(discount);
-        totalPrice= new BigDecimal(totalPrice)
+        totalPrice = new BigDecimal(totalPrice)
                 .setScale(3, RoundingMode.HALF_UP)
                 .doubleValue();
         System.out.println("주문이 완료되었습니다. 금액은 ₩ " + totalPrice + " 입니다.");
@@ -145,29 +144,36 @@ public class Kiosk {
         System.out.println("0. 뒤로가기");
 
 
-            System.out.println("번호를 선택해주세요. ");
+        System.out.println("번호를 선택해주세요. ");
 
-            int idx = sc.nextInt();
+        int idx = sc.nextInt();
 
-            if (idx == 0) {
-                start(); // start()처음으로 돌아감. 상위 단계가 start라서 뒤로가기 효과있음
-            }
-            if (idx < 0 || idx > items.size()) {
-                throw new IllegalArgumentException("올바른 메뉴를 눌러주세요.\n처음으로 돌아갑니다.1");
-            }
-            MenuItem selectedItem = items.get(idx - 1);
-            System.out.println("선택한 항목 : " + selectedItem);
-
-            System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
-            System.out.println("1. 확인       2. 선택 취소(뒤로 가기)");
-
-            int cartidx = sc.nextInt();
-            if (cartidx == 1) cart.addCart(selectedItem);
-            else if (cartidx == 2) start(); //다시 처음으로 돌아감
-            else throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
-
+        if (idx == 0) {
+            start(); // start()처음으로 돌아감. 상위 단계가 start라서 뒤로가기 효과있음
         }
+        if (idx < 0 || idx > items.size()) {
+            throw new IllegalArgumentException("올바른 메뉴를 눌러주세요.\n처음으로 돌아갑니다.");
+        }
+        MenuItem selectedItem = items.get(idx - 1);
+        System.out.println("선택한 항목 : " + selectedItem);
+
+        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+        System.out.println("1. 확인       2. 선택 취소(뒤로 가기)");
+
+        int cartidx = sc.nextInt();
+        switch (cartidx) {
+            case 1:
+                cart.addCart(selectedItem);
+                break;
+            case 2:
+                start();
+                break;
+            default:
+                throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
+        }
+
     }
+}
 
 
 
