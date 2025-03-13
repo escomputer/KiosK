@@ -1,5 +1,7 @@
 package com.example.kiosk;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -74,11 +76,11 @@ public class Kiosk {
     }
 
     private void showOrderMenu(int idx, Scanner sc) {
-        try {
+
             if (idx == menus.size() + 1) {
                 cart.showCart();
                 System.out.println("위와 같이 주문 하시겠습니까?");
-                System.out.println("1.주문    2.메뉴판으로 돌아가기");
+                System.out.println("1.주문    2.메뉴판으로 돌아가기    3.장바구니 메뉴 삭제하기 ");
                 int orderIdx = sc.nextInt();
                 switch (orderIdx) {
                     case 1:
@@ -87,6 +89,12 @@ public class Kiosk {
 
                     case 2:
                         start();
+                        break;
+                    case 3:
+                        while(true){
+                            if(cart.removeName(sc)) break;
+                        }
+                        break;
                     default:
                         throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
                 }
@@ -94,10 +102,7 @@ public class Kiosk {
                 cart.clearCart(); //주문 취소했기때문에 장바구니에 담겨있던것도 지운다 !
                 start();
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            sc.nextLine();
-        }
+
 
 
     }
@@ -119,6 +124,9 @@ public class Kiosk {
         };
 
         double totalPrice = cart.getTotalPrice(discount);
+        totalPrice= new BigDecimal(totalPrice)
+                .setScale(3, RoundingMode.HALF_UP)
+                .doubleValue();
         System.out.println("주문이 완료되었습니다. 금액은 ₩ " + totalPrice + " 입니다.");
 
 
@@ -136,7 +144,7 @@ public class Kiosk {
         }
         System.out.println("0. 뒤로가기");
 
-        try {
+
             System.out.println("번호를 선택해주세요. ");
 
             int idx = sc.nextInt();
@@ -158,15 +166,9 @@ public class Kiosk {
             else if (cartidx == 2) start(); //다시 처음으로 돌아감
             else throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
 
-        } catch (InputMismatchException e) {
-            System.out.println("숫자를 입력해주세요.");
-            sc.nextLine(); //버퍼 비우기 !!
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            sc.nextLine();
         }
     }
 
 
-}
+
 
