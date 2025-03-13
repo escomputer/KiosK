@@ -16,6 +16,11 @@ public class KiosK {
         this.cart = new Cart();
     }
 
+    //기능
+    public void addMenu(Menu menu) {
+        menus.add(menu);
+    }
+
 
 
     public void start() {
@@ -44,7 +49,6 @@ public class KiosK {
 
                 if (idx == 0) {
                     System.out.println("키오스크를 종료합니다.");
-
                     break;
                 }
                 if (idx >= 1 && idx <= menus.size()) {
@@ -52,7 +56,6 @@ public class KiosK {
                 } else if (idx == menus.size() + 1 || idx == menus.size() + 2) {
                     if (cart.isEmpty()) throw new IllegalArgumentException("장바구니가 비어있어 해당번호는 비활성화 상태입니다.");
                     else showOrderMenu(idx, sc);
-                    break;
                 } else {
                     throw new IllegalArgumentException("항목에 있는 번호를 눌러주세요.");
                 }
@@ -79,7 +82,7 @@ public class KiosK {
                 System.out.println("1.주문    2.메뉴판으로 돌아가기");
                 int orderIdx = sc.nextInt();
                 if (orderIdx == 1) {
-                    Order(sc);
+                    order(sc);
 
 
                 } else if (orderIdx == 2) {
@@ -97,7 +100,7 @@ public class KiosK {
 
     }
 
-    private void Order(Scanner sc){
+    private void order(Scanner sc){
         System.out.println("할인 정보를 입력해주세요.");
         System.out.println("1. 국가유공자 : 10% ");
         System.out.println("2. 군인     :  5%");
