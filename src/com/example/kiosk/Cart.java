@@ -10,6 +10,7 @@ public class Cart {
 
 
 
+
     //생성자
     public Cart(){
         this.cartList = new ArrayList<>();
@@ -44,10 +45,18 @@ public class Cart {
         cartList.clear();
     }
 
-    public double getTotalPrice(){
+    public double getTotalPrice(Discount discount){
         double total=cartList.stream()
                 .mapToDouble(MenuItem::getPrice)
                 .sum();
-        return total;
+        double discountPrice = discount.getDiscount();
+        return total*discountPrice;
     }
+
+//    public void removeName(String name){
+//        cartList=cartList.stream()
+//                .filter(item->!item.getName().equals(name))
+//                .collect(Collectors.toList());
+//        System.out.println(name+"을 장바구니에서 제거합니다.");
+//    }
 }
