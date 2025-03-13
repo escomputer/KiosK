@@ -16,8 +16,8 @@ public class Menu {
         this.category = category;
     } // 카테고리 추가 카테고리에는 카테고리와 메뉴들로 구성되어있음.
 
-    public void addMenuItem(MenuItem item) {
-        menuItems.add(item);
+    public void addMenuItems(List<MenuItem> items) {
+        menuItems.addAll(items);
     }
 
     public Category getCategory(){
