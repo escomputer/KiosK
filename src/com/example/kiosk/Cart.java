@@ -2,6 +2,7 @@ package com.example.kiosk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.*;
 
 public class Cart {
     //필드
@@ -22,17 +23,17 @@ public class Cart {
 
     public void showCart(){
 
-        double total = 0;
+
         System.out.println("====장바구니====");
-        for (int i =0;i<cartList.size();i++){
-            MenuItem item = cartList.get(i);
-            System.out.println((i+1)+". "+item.getName()+" | ₩ "+item.getPrice()+" | "+item.getInfo());
-            total+=item.getPrice();
-        }
+        cartList.forEach(System.out::println);// cartList의 요소인 MenuItem 순회 -> toString 오버라이드해서 양식 거기서 갖다씀.
+
+        double total=cartList.stream()
+                        .mapToDouble(MenuItem::getPrice)
+                                .sum();
 
         System.out.println("============================");
         System.out.println("총 금액 : ₩"+ total);
-        System.out.println("============================");
+
     }
 
     public boolean isEmpty(){
@@ -44,10 +45,9 @@ public class Cart {
     }
 
     public double getTotalPrice(){
-        double total=0;
-        for(MenuItem item : cartList){
-            total+=item.getPrice();
-        }
+        double total=cartList.stream()
+                .mapToDouble(MenuItem::getPrice)
+                .sum();
         return total;
     }
 }
